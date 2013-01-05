@@ -19,14 +19,14 @@ public class Filter implements GraphConvertStrategy {
 	public Graph convert(Graph graph) {
 		Graph temp = new Graph<String, DefaultEdge>(DefaultEdge.class);
 		
-		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
+		Set<DefaultEdge> edges = graph.edgeSet();
 		
 		for (DefaultEdge e : edges) {
-			if(graph.getTGraph().getEdgeWeight(e) <= r) {
-				temp.
+			if(graph.getEdgeWeight(e) > r) {
+				temp.removeEdge(e);
 			}
 			
-			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getTGraph().getEdgeSource(e), graph.getTGraph().getEdgeTarget(e)));			
+			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getEdgeSource(e), graph.getEdgeTarget(e)));			
 		}
 	}
 
