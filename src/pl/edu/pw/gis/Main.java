@@ -35,7 +35,7 @@ public class Main {
         g.addWeightedEdge( "v3", "v1", 12.0 );
         g.addWeightedEdge( "v4", "v3", 9.0 );
 
-        Filter filter = new Filter(11.0);
+        Filter filter = new Filter(30.0);
         g = filter.convert(g);
         
         JGraphXAdapter<String, DefaultWeightedEdge> graph = g.getXGraph();
