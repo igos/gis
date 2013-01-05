@@ -21,9 +21,11 @@ public class Filter implements GraphConvertStrategy {
 	}
 	
 	@Override
-	public Graph convert(Graph graph) {
+	public Graph<String,DefaultEdge> convert(Graph<String,DefaultEdge> graph) {
 		
 		Set<DefaultEdge> edges = graph.edgeSet();
+		
+		graph.addEdge(arg0, arg1, arg2)
 		
 		for (DefaultEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
@@ -31,8 +33,6 @@ public class Filter implements GraphConvertStrategy {
 			}			
 		}
 		return graph;
-		
-		
 		//!TODO usuwanie wierzcholkow bez krawedzi???
 	}
 }
