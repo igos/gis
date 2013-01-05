@@ -12,8 +12,13 @@ public class Filter implements GraphConvertStrategy {
 	
 	@Override
 	public Graph convert(Graph graph) {
-		// TODO Auto-generated method stub
-		return null;
+		
+
+		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
+
+		for (DefaultEdge e : edges) {
+			gv.addln(String.format("\"%s\" -> \"%s\"", g.getEdgeSource(e), g.getEdgeTarget(e)));			
+		}
 	}
 
 }
