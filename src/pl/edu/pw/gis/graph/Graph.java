@@ -5,7 +5,7 @@ import org.jgrapht.graph.*;
 import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
-public class Graph<V,E> {
+public class Graph<String,DefaultEdge> {
 	ListenableUndirectedWeightedGraph<V, E> r;
 	public Graph() {
 		
