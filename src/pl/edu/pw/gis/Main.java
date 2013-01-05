@@ -49,6 +49,8 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
         frame.setVisible(true);
+        
+        //dummy autogeometry
         graph.getModel().beginUpdate();
         double x = 20, y = 20;
         for (mxCell cell : graph.getVertexToCellMap().values()) {
