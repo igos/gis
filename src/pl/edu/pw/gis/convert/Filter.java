@@ -20,7 +20,7 @@ public class Filter implements GraphConvertStrategy {
 		
 		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
 		
-		graph.getTGraph().
+		
 
 		for (DefaultEdge e : edges) {
 			
