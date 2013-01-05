@@ -8,7 +8,6 @@ import com.mxgraph.view.mxGraph;
 public class Graph<V,E> {
 	SimpleWeightedGraph<V, E> r;
 	public Graph() {
-		//r.addEdge(arg0, arg1)
 		
 	}
 	
