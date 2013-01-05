@@ -10,4 +10,13 @@ public class Graph {
 		//r.addEdge(arg0, arg1)
 		
 	}
+	
+	
+	getXGraph() {
+		
+	}
+	
+	getTGraph() {
+		
+	}
 }
