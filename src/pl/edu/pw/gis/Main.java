@@ -63,7 +63,28 @@ public class Main {
 	         graph.getModel().endUpdate();
 	    }
         
-        
+	 // define layout
+        mxIGraphLayout layout = new mxFastOrganicLayout(graph);
+
+        // layout using morphing
+        graph.getModel().beginUpdate();
+        try {
+            layout.execute(graph.getDefaultParent());
+        } finally {
+            mxMorphing morph = new mxMorphing(graphComponent, 20, 1.2, 20);
+
+            morph.addListener(mxEvent.DONE, new mxIEventListener() {
+
+                @Override
+                public void invoke(Object arg0, mxEventObject arg1) {
+                    graph.getModel().endUpdate();
+                    // fitViewport();
+                }
+
+            });
+
+            morph.startAnimation();
+        }
 //        //dummy autogeometry
 //        graph.getModel().beginUpdate();
 ////        double x = 20, y = 20;
