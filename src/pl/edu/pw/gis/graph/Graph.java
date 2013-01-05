@@ -19,4 +19,8 @@ public class Graph<String,DefaultEdge> {
 	public org.jgrapht.Graph<String,DefaultEdge> getTGraph() {
 		return r;
 	}
+	
+	public ListenableUndirectedWeightedGraph<String,DefaultEdge> getGraph() {
+		return r;
+	}
 }
