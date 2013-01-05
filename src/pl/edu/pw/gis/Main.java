@@ -60,15 +60,8 @@ public class Main {
         frame.getContentPane().add(BorderLayout.CENTER, graphComponent);
         frame.setVisible(true);
         
-        Object parent = graph.getDefaultParent();
-        graph.getModel().beginUpdate();
-	    try {   
-	    	
-	    } finally {
-	         graph.getModel().endUpdate();
-	    }
-        
-	 // define layout
+      
+        // define layout
         mxIGraphLayout layout = new mxFastOrganicLayout(graph);
 
         // layout using morphing
