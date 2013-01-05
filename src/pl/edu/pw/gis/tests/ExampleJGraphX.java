@@ -1,4 +1,4 @@
-package pl.edu.pw.gis;
+package pl.edu.pw.gis.tests;
 import javax.swing.JFrame;
 
 import com.mxgraph.swing.mxGraphComponent;
