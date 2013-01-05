@@ -12,11 +12,10 @@ public class Graph {
 	}
 	
 	
-	getXGraph() {
+	public mxGraph getXGraph() {
 		
 	}
-	
-	getTGraph() {
+	public org.jgrapht.Graph getTGraph() {
 		
 	}
 }
