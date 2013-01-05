@@ -8,9 +8,9 @@ import pl.edu.pw.gis.GraphConvertStrategy;
 import pl.edu.pw.gis.graph.Graph;
 
 public class Filter implements GraphConvertStrategy {
-	private int r;
+	private double r;
 	
-	public Filter(int r) {
+	public Filter(double r) {
 		this.r = r;
 	}
 	
@@ -20,10 +20,10 @@ public class Filter implements GraphConvertStrategy {
 		
 		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
 		
-		
-
 		for (DefaultEdge e : edges) {
-			
+			if(graph.getTGraph().getEdgeWeight(e) > r) {
+				
+			}
 			
 			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getTGraph().getEdgeSource(e), graph.getTGraph().getEdgeTarget(e)));			
 		}
