@@ -3,6 +3,7 @@ package pl.edu.pw.gis.convert;
 import java.util.Set;
 
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
 import pl.edu.pw.gis.GraphConvertStrategy;
 import pl.edu.pw.gis.graph.Graph;
@@ -16,7 +17,7 @@ public class Filter implements GraphConvertStrategy {
 	
 	@Override
 	public Graph convert(Graph graph) {
-		Graph temp;
+		Graph temp = new Graph<String, DefaultEdge>(DefaultEdge.class);
 		
 		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
 		
