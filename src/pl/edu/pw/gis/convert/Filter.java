@@ -3,6 +3,7 @@ package pl.edu.pw.gis.convert;
 import java.util.Set;
 
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 import pl.edu.pw.gis.GraphConvertStrategy;
@@ -21,11 +22,11 @@ public class Filter implements GraphConvertStrategy {
 	}
 	
 	@Override
-	public Graph<String,DefaultEdge> convert(Graph<String,DefaultEdge> graph) {
+	public Graph<String,DefaultWeightedEdge> convert(Graph<String,DefaultWeightedEdge> graph) {
 		
-		Set<DefaultEdge> edges = graph.edgeSet();
+		Set<DefaultWeightedEdge> edges = graph.edgeSet();
 		
-		for (DefaultEdge e : edges) {
+		for (DefaultWeightedEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
 				graph.removeEdge(e);
 			}			

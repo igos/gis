@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import org.jgrapht.ListenableGraph;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.ListenableDirectedGraph;
 
 import pl.edu.pw.gis.convert.Filter;
