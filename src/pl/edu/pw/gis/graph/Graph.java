@@ -13,7 +13,7 @@ public class Graph<V,E> {
 	
 	
 	public JGraphXAdapter<V,E> getXGraph() {
-		return new JGraphXAdapter<>(r);
+		return new JGraphXAdapter<V,E>(r);
 		
 	}
 	public org.jgrapht.Graph<V,E> getTGraph() {
