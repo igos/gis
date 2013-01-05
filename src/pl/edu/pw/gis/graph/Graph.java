@@ -13,7 +13,7 @@ public class Graph<V,E> {
 	}
 	
 	
-	public mxGraph getXGraph() {
+	public JGraphXAdapter<V,E> getXGraph() {
 		return null;
 		
 	}
