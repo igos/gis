@@ -21,7 +21,6 @@ public class Filter implements GraphConvertStrategy {
 		this.r = r;
 	}
 	
-	@Override
 	public Graph<String,DefaultWeightedEdge> convert(Graph<String,DefaultWeightedEdge> graph) {
 		
 		Set<DefaultWeightedEdge> edges = graph.edgeSet();
