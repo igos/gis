@@ -4,8 +4,10 @@ import pl.edu.pw.gis.Graph;
 import pl.edu.pw.gis.GraphConvertStrategy;
 
 public class Filter implements GraphConvertStrategy {
+	private int r;
+	
 	public Filter(int r) {
-		
+		this.r = r;
 	}
 	
 	@Override
