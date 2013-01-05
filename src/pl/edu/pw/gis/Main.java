@@ -24,7 +24,7 @@ public class Main {
 		
         Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 
-        // add some sample data (graph manipulated via JGraphT)
+        // add some sample data
         g.addVertex( "v1" );
         g.addVertex( "v2" );
         g.addVertex( "v3" );
