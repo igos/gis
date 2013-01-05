@@ -27,9 +27,10 @@ public class Filter implements GraphConvertStrategy {
 		
 		for (DefaultWeightedEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
-				graph.removeEdge(e);
+				
 			}			
 		}
+		graph.removeAllEdges(arg0);
 		return graph;
 		//!TODO usuwanie wierzcholkow bez krawedzi???
 	}
