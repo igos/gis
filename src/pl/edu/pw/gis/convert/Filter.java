@@ -23,10 +23,8 @@ public class Filter implements GraphConvertStrategy {
 		for (DefaultEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
 				graph.removeEdge(e);
-			}
-			
-			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getEdgeSource(e), graph.getEdgeTarget(e)));			
+			}			
 		}
+		return graph;
 	}
-
 }
