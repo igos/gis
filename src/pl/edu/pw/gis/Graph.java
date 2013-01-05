@@ -5,5 +5,8 @@ import org.jgrapht.graph.*;
 
 
 public class Graph {
-	UndirectedGraph r;
+	SimpleWeightedGraph<V, E> r;
+	public Graph() {
+		r.
+	}
 }
