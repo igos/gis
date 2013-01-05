@@ -4,7 +4,9 @@ import pl.edu.pw.gis.Graph;
 import pl.edu.pw.gis.GraphConvertStrategy;
 
 public class Filter implements GraphConvertStrategy {
-	
+	public Filter(int r) {
+		
+	}
 	
 	@Override
 	public Graph convert(Graph graph) {
