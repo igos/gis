@@ -21,7 +21,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-        Graph<String, DefaultEdge> g = new Graph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+        Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 
         // add some sample data (graph manipulated via JGraphT)
         g.addVertex( "v1" );
@@ -37,7 +37,7 @@ public class Main {
         Filter filter = new Filter(11.0);
         g = filter.convert(g);
         
-        JGraphXAdapter<String, DefaultEdge> graph = g.getXGraph();
+        JGraphXAdapter<String, DefaultWeightedEdge> graph = g.getXGraph();
         
         JFrame frame = new JFrame();
         mxGraphComponent graphComponent = new mxGraphComponent(graph);

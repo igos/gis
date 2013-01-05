@@ -13,18 +13,18 @@ import com.mxgraph.view.mxGraph;
  * @param <String>
  * @param <DefaultEdge>
  */
-public class Graph<String,DefaultEdge> extends ListenableUndirectedWeightedGraph<String,DefaultEdge>  {
-	public Graph(Class<? extends DefaultEdge> arg0) {
+public class Graph<String,DefaultWeightedEdge> extends ListenableUndirectedWeightedGraph<String,DefaultWeightedEdge>  {
+	public Graph(Class<? extends DefaultWeightedEdge> arg0) {
 		super(arg0);
 	}
 
-	public JGraphXAdapter<String,DefaultEdge> getXGraph() {
-		return new JGraphXAdapter<String,DefaultEdge>(this);
+	public JGraphXAdapter<String,DefaultWeightedEdge> getXGraph() {
+		return new JGraphXAdapter<String,DefaultWeightedEdge>(this);
 	
 	}
 	///Adds edge with weight
-	public DefaultEdge addWeightedEdge(String e1, String e2, Double weight) {
-		DefaultEdge temp = this.addEdge(e1, e2);
+	public DefaultWeightedEdge addWeightedEdge(String e1, String e2, Double weight) {
+		DefaultWeightedEdge temp = this.addEdge(e1, e2);
 		this.setEdgeWeight(temp, weight);
 		return temp;
 	}
