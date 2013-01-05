@@ -21,6 +21,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
+import com.mxgraph.util.mxEventObject;
 
 public class Main {
 
