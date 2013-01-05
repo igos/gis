@@ -77,7 +77,7 @@ public class JGraphXAdapter<V, E> extends mxGraph implements GraphListener<V, E>
             V target = graphT.getEdgeTarget(edge);              
             mxCell cell = new mxCell(edge);
             cell.setEdge(true);
-            cell.setId("AA");
+            cell.setId(null);
             cell.setGeometry(new mxGeometry());
             cell.getGeometry().setRelative(true);
             addEdge(cell, defaultParent, vertexToCellMap.get(source),  vertexToCellMap.get(target), null);
