@@ -22,4 +22,5 @@ public class Graph<String,DefaultEdge> extends ListenableUndirectedWeightedGraph
 		return new JGraphXAdapter<String,DefaultEdge>(this);
 		
 	}
+
 }
