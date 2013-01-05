@@ -22,8 +22,8 @@ public class Graph<String,DefaultEdge> extends ListenableUndirectedWeightedGraph
 		return new JGraphXAdapter<String,DefaultEdge>(this);
 	
 	}
-	
-	public void addWeightedEdge(String e1, String e2, Double weight) {
+	///Adds edge with weight
+	public DefaultEdge addWeightedEdge(String e1, String e2, Double weight) {
 		DefaultEdge temp = this.addEdge(e1, e2);
 		this.setEdgeWeight(temp, weight);
 		return temp;
