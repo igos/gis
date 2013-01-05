@@ -57,8 +57,11 @@ public class Main {
         
         Object parent = graph.getDefaultParent();
         graph.getModel().beginUpdate();
-        
-        
+	    try {   
+	    	
+	    } finally {
+	         graph.getModel().endUpdate();
+	    }
         
         
 //        //dummy autogeometry
