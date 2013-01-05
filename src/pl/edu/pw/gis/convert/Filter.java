@@ -22,7 +22,7 @@ public class Filter implements GraphConvertStrategy {
 	}
 	
 	public Graph<String,DefaultWeightedEdge> convert(Graph<String,DefaultWeightedEdge> graph) {
-		
+		Set<DefaultWeightedEdge> edgesToRemove = new Set<DefaultWeightedEdge>();
 		Set<DefaultWeightedEdge> edges = graph.edgeSet();
 		
 		for (DefaultWeightedEdge e : edges) {
