@@ -14,9 +14,13 @@ import pl.edu.pw.gis.graph.Graph;
 import pl.edu.pw.gis.graph.JGraphXAdapter;
 
 import com.mxgraph.layout.mxFastOrganicLayout;
+import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.swing.util.mxMorphing;
+import com.mxgraph.util.mxEvent;
+import com.mxgraph.util.mxEventSource.mxIEventListener;
 
 public class Main {
 
@@ -44,7 +48,7 @@ public class Main {
         g = filter.convert(g);
         
         //display
-        JGraphXAdapter<String, DefaultWeightedEdge> graph = g.getXGraph();
+        final JGraphXAdapter<String, DefaultWeightedEdge> graph = g.getXGraph();
         
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,13 +78,11 @@ public class Main {
             mxMorphing morph = new mxMorphing(graphComponent, 20, 1.2, 20);
 
             morph.addListener(mxEvent.DONE, new mxIEventListener() {
-
                 @Override
                 public void invoke(Object arg0, mxEventObject arg1) {
                     graph.getModel().endUpdate();
                     // fitViewport();
                 }
-
             });
 
             morph.startAnimation();
