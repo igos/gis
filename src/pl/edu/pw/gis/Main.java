@@ -6,6 +6,7 @@ import org.jgrapht.ListenableGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.ListenableDirectedGraph;
 
+import pl.edu.pw.gis.convert.Filter;
 import pl.edu.pw.gis.graph.Graph;
 import pl.edu.pw.gis.graph.JGraphXAdapter;
 
@@ -28,15 +29,15 @@ public class Main {
         g.addVertex( "v3" );
         g.addVertex( "v4" );
 
-        g.addWeightedEdge( "v1", "v2" );
-        g.addWeightedEdge( "v2", "v3" );
-        g.addWeightedEdge( "v3", "v1" );
-        g.addWeightedEdge( "v4", "v3" );
+        g.addWeightedEdge( "v1", "v2", 10.0 );
+        g.addWeightedEdge( "v2", "v3", 20.0 );
+        g.addWeightedEdge( "v3", "v1", 12.0 );
+        g.addWeightedEdge( "v4", "v3", 9.0 );
 
-        JGraphXAdapter<String, DefaultEdge> graph = new JGraphXAdapter<String, DefaultEdge>(g);
+        g = new Filter(g);
 
         JFrame frame = new JFrame();
-        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        mxGraphComponent graphComponent = new mxGraphComponent(g.getXGraph());
         frame.getContentPane().add(graphComponent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
