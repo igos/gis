@@ -6,7 +6,7 @@ import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
 public class Graph<V,E> {
-	SimpleWeightedGraph<String, String> r;
+	SimpleWeightedGraph<V, E> r;
 	public Graph() {
 		//r.addEdge(arg0, arg1)
 		
@@ -19,6 +19,5 @@ public class Graph<V,E> {
 	}
 	public org.jgrapht.Graph<V,E> getTGraph() {
 		return r;
-		
 	}
 }
