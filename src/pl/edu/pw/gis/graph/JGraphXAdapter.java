@@ -1,4 +1,4 @@
-package pl.edu.pw.gis.tests;
+package pl.edu.pw.gis.graph;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package pl.edu.pw.gis;
+package pl.edu.pw.gis.graph;
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
 
