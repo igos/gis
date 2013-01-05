@@ -20,11 +20,11 @@ public class Graph<String,DefaultEdge> extends ListenableUndirectedWeightedGraph
 
 	public JGraphXAdapter<String,DefaultEdge> getXGraph() {
 		return new JGraphXAdapter<String,DefaultEdge>(this);
-		
+	
 	}
 	
-	public addWeightedEdge(String e1, String e2, Double weight) {
-		graph.addEdge(arg0, arg1)
+	public void addWeightedEdge(String e1, String e2, Double weight) {
+		this.addEdge(arg0, arg1)
 	}
 
 }
