@@ -6,17 +6,14 @@ import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
 public class Graph<String,DefaultEdge> extends ListenableUndirectedWeightedGraph<String,DefaultEdge>  {
-	ListenableUndirectedWeightedGraph<String,DefaultEdge> r;
-	public Graph() {
-		
+	
+	public Graph(WeightedGraph<String, DefaultEdge> arg0) {
+		super(arg0);
+		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	public JGraphXAdapter<String,DefaultEdge> getXGraph() {
-		return new JGraphXAdapter<String,DefaultEdge>(r);
+		return new JGraphXAdapter<String,DefaultEdge>(this);
 		
-	}
-	public ListenableUndirectedWeightedGraph<String,DefaultEdge> getTGraph() {
-		return r;
 	}
 }
