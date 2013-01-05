@@ -17,7 +17,7 @@ public class Filter implements GraphConvertStrategy {
 	
 	@Override
 	public Graph convert(Graph graph) {
-		Graph temp = new Graph<String, DefaultEdge>(DefaultEdge.class);
+		Graph temp = graph.clone();
 		
 		Set<DefaultEdge> edges = graph.edgeSet();
 		
