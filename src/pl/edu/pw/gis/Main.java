@@ -18,8 +18,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// create a JGraphT graph
-        ListenableGraph<String, DefaultEdge> g = new ListenableDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+		
+        Graph<String, DefaultEdge> g = new Graph<String, DefaultEdge>(DefaultEdge.class);
 
         // add some sample data (graph manipulated via JGraphT)
         g.addVertex( "v1" );
