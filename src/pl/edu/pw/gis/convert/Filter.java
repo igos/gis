@@ -1,5 +1,6 @@
 package pl.edu.pw.gis.convert;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.jgrapht.graph.DefaultEdge;
@@ -22,15 +23,15 @@ public class Filter implements GraphConvertStrategy {
 	}
 	
 	public Graph<String,DefaultWeightedEdge> convert(Graph<String,DefaultWeightedEdge> graph) {
-		Set<DefaultWeightedEdge> edgesToRemove = new Set<DefaultWeightedEdge>();
+		ArrayList<DefaultWeightedEdge> edgesToRemove = new ArrayList<DefaultWeightedEdge>();
 		Set<DefaultWeightedEdge> edges = graph.edgeSet();
 		
 		for (DefaultWeightedEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
-				
+				edgesToRemove.add(e);
 			}			
 		}
-		graph.removeAllEdges(arg0);
+		graph.removeAllEdges(edgesToRemove);
 		return graph;
 		//!TODO usuwanie wierzcholkow bez krawedzi???
 	}
