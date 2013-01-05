@@ -31,6 +31,6 @@ public class Filter implements GraphConvertStrategy {
 			}			
 		}
 		return graph;
-		//!TODO 
+		//!TODO usuwanie wierzcholkow bez krawedzi???
 	}
 }

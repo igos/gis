@@ -5,6 +5,14 @@ import org.jgrapht.graph.*;
 import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
+/**
+ * 
+ * 
+ * @author Igor
+ *
+ * @param <String>
+ * @param <DefaultEdge>
+ */
 public class Graph<String,DefaultEdge> extends ListenableUndirectedWeightedGraph<String,DefaultEdge>  {
 	public Graph(Class<? extends DefaultEdge> arg0) {
 		super(arg0);
