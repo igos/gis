@@ -17,13 +17,12 @@ public class Filter implements GraphConvertStrategy {
 	
 	@Override
 	public Graph convert(Graph graph) {
-		Graph temp = graph.clone();
 		
 		Set<DefaultEdge> edges = graph.edgeSet();
 		
 		for (DefaultEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
-				temp.removeEdge(e);
+				graph.removeEdge(e);
 			}
 			
 			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getEdgeSource(e), graph.getEdgeTarget(e)));			
