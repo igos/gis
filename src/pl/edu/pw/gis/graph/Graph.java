@@ -6,7 +6,7 @@ import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
 /**
- * 
+ * Wrapper na JGraphT.Graph z mozliwoscia konwersji na JGraphX
  * 
  * @author Igor
  *
