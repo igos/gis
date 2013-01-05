@@ -21,8 +21,8 @@ public class Filter implements GraphConvertStrategy {
 		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
 		
 		for (DefaultEdge e : edges) {
-			if(graph.getTGraph().getEdgeWeight(e) > r) {
-				
+			if(graph.getTGraph().getEdgeWeight(e) <= r) {
+				temp.
 			}
 			
 			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getTGraph().getEdgeSource(e), graph.getTGraph().getEdgeTarget(e)));			
