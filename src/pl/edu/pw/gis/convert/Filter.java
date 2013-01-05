@@ -21,7 +21,9 @@ public class Filter implements GraphConvertStrategy {
 		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
 
 		for (DefaultEdge e : edges) {
-			gv.addln(String.format("\"%s\" -> \"%s\"", g.getEdgeSource(e), g.getEdgeTarget(e)));			
+			
+			
+			gv.addln(String.format("\"%s\" -> \"%s\"", graph.getTGraph().getEdgeSource(e), graph.getTGraph().getEdgeTarget(e)));			
 		}
 	}
 
