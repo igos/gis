@@ -34,10 +34,13 @@ public class Main {
         g.addWeightedEdge( "v2", "v3", 20.0 );
         g.addWeightedEdge( "v3", "v1", 12.0 );
         g.addWeightedEdge( "v4", "v3", 9.0 );
-
+        
+        
+        // use ConvertStrategy
         Filter filter = new Filter(30.0);
         g = filter.convert(g);
         
+        //display
         JGraphXAdapter<String, DefaultWeightedEdge> graph = g.getXGraph();
         
         JFrame frame = new JFrame();
@@ -46,12 +49,6 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
         frame.setVisible(true);
-
-//        g.addVertex( "v5" );
-//        g.addVertex( "v6" );
-//        g.addVertex( "v7" );
-//        g.addVertex( "v8" );
-
         graph.getModel().beginUpdate();
         double x = 20, y = 20;
         for (mxCell cell : graph.getVertexToCellMap().values()) {
