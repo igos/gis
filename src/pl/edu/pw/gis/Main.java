@@ -61,39 +61,39 @@ public class Main {
         frame.setVisible(true);
         
       
-        // define layout
-        mxIGraphLayout layout = new mxFastOrganicLayout(graph);
-
-        // layout using morphing
-        graph.getModel().beginUpdate();
-        try {
-            layout.execute(graph.getDefaultParent());
-        } finally {
-            mxMorphing morph = new mxMorphing(graphComponent, 20, 1.2, 20);
-
-            morph.addListener(mxEvent.DONE, new mxIEventListener() {
-                @Override
-                public void invoke(Object arg0, mxEventObject arg1) {
-                    graph.getModel().endUpdate();
-                    // fitViewport();
-                }
-            });
-
-            morph.startAnimation();
-        }
-//        //dummy autogeometry
+//        // define layout
+//        mxIGraphLayout layout = new mxFastOrganicLayout(graph);
+//
+//        // layout using morphing
 //        graph.getModel().beginUpdate();
-////        double x = 20, y = 20;
-////        for (mxCell cell : graph.getVertexToCellMap().values()) {
-////            graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
-////            x += 40;
-////            y += 40;
-////            if (x > 200) {
-////                x = 20;
-////                y += 40;
-////            }
-////        }
-//        graph.getModel().endUpdate();
+//        try {
+//            layout.execute(graph.getDefaultParent());
+//        } finally {
+//            mxMorphing morph = new mxMorphing(graphComponent, 20, 1.2, 20);
+//
+//            morph.addListener(mxEvent.DONE, new mxIEventListener() {
+//                @Override
+//                public void invoke(Object arg0, mxEventObject arg1) {
+//                    graph.getModel().endUpdate();
+//                    // fitViewport();
+//                }
+//            });
+//
+//            morph.startAnimation();
+//        }
+        //dummy autogeometry
+        graph.getModel().beginUpdate();
+        double x = 20, y = 20;
+        for (mxCell cell : graph.getVertexToCellMap().values()) {
+            graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
+            x += 40;
+            y += 40;
+            if (x > 200) {
+                x = 20;
+                y += 40;
+            }
+        }
+        graph.getModel().endUpdate();
 	}
 
 }
