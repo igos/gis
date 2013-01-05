@@ -5,7 +5,7 @@ import org.jgrapht.graph.*;
 
 
 public class Graph {
-	SimpleWeightedGraph<V, E> r;
+	SimpleWeightedGraph<String, String> r;
 	public Graph() {
 		r.
 	}
