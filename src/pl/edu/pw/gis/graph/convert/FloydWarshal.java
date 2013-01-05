@@ -1,4 +1,7 @@
-package pl.edu.pw.gis;
+package pl.edu.pw.gis.graph.convert;
+
+import pl.edu.pw.gis.Graph;
+import pl.edu.pw.gis.GraphConvertStrategy;
 
 public class FloydWarshal implements GraphConvertStrategy {
 
