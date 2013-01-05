@@ -34,7 +34,8 @@ public class Main {
         g.addWeightedEdge( "v3", "v1", 12.0 );
         g.addWeightedEdge( "v4", "v3", 9.0 );
 
-        g = new Filter(g);
+        Filter filter = new Filter(11.0);
+        g = filter.convert(g);
 
         JFrame frame = new JFrame();
         mxGraphComponent graphComponent = new mxGraphComponent(g.getXGraph());
