@@ -11,6 +11,7 @@ import pl.edu.pw.gis.convert.Filter;
 import pl.edu.pw.gis.graph.Graph;
 import pl.edu.pw.gis.graph.JGraphXAdapter;
 
+import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.swing.mxGraphComponent;
@@ -44,24 +45,38 @@ public class Main {
         JGraphXAdapter<String, DefaultWeightedEdge> graph = g.getXGraph();
         
         JFrame frame = new JFrame();
-        mxGraphComponent graphComponent = new mxGraphComponent(graph);
-        frame.getContentPane().add(graphComponent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
         frame.setVisible(true);
         
-//        //dummy autogeometry
-//        graph.getModel().beginUpdate();
-//        double x = 20, y = 20;
-//        for (mxCell cell : graph.getVertexToCellMap().values()) {
-//            graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
-//            x += 40;
-//            y += 40;
-//            if (x > 200) {
-//                x = 20;
-//                y += 40;
-//            }
-//        }
+        //define layout 
+        mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
+
+        //set all properties
+        layout.setMinDistanceLimit(10);
+        layout.setInitialTemp(10);
+        layout.setForceConstant(10);
+        layout.setDisableEdgeStyle(true);
+
+        //layout graph
+        layout.execute(graph.getDefaultParent());
+        
+        
+        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        frame.getContentPane().add(graphComponent);
+        
+        //dummy autogeometry
+        graph.getModel().beginUpdate();
+        double x = 20, y = 20;
+        for (mxCell cell : graph.getVertexToCellMap().values()) {
+            graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
+            x += 40;
+            y += 40;
+            if (x > 200) {
+                x = 20;
+                y += 40;
+            }
+        }
         graph.getModel().endUpdate();
 	}
 
