@@ -44,7 +44,7 @@ public class Main {
         g.addWeightedEdge( "v4", "v3", 9.0 );
         
         
-        // use ConvertStrategy
+        // use ConvertStrategy - Filter
         Filter filter = new Filter(30.0);
         g = filter.convert(g);
         
