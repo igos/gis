@@ -55,19 +55,25 @@ public class Main {
         frame.getContentPane().add(BorderLayout.CENTER, graphComponent);
         frame.setVisible(true);
         
-        //dummy autogeometry
+        Object parent = graph.getDefaultParent();
         graph.getModel().beginUpdate();
-//        double x = 20, y = 20;
-//        for (mxCell cell : graph.getVertexToCellMap().values()) {
-//            graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
-//            x += 40;
-//            y += 40;
-//            if (x > 200) {
-//                x = 20;
-//                y += 40;
-//            }
-//        }
-        graph.getModel().endUpdate();
+        
+        
+        
+        
+//        //dummy autogeometry
+//        graph.getModel().beginUpdate();
+////        double x = 20, y = 20;
+////        for (mxCell cell : graph.getVertexToCellMap().values()) {
+////            graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
+////            x += 40;
+////            y += 40;
+////            if (x > 200) {
+////                x = 20;
+////                y += 40;
+////            }
+////        }
+//        graph.getModel().endUpdate();
 	}
 
 }
