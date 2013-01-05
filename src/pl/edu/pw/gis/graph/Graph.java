@@ -6,17 +6,17 @@ import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
 public class Graph<String,DefaultEdge> {
-	ListenableUndirectedWeightedGraph<V, E> r;
+	ListenableUndirectedWeightedGraph<String,DefaultEdge> r;
 	public Graph() {
 		
 	}
 	
 	
-	public JGraphXAdapter<V,E> getXGraph() {
-		return new JGraphXAdapter<V,E>(r);
+	public JGraphXAdapter<String,DefaultEdge> getXGraph() {
+		return new JGraphXAdapter<String,DefaultEdge>(r);
 		
 	}
-	public org.jgrapht.Graph<V,E> getTGraph() {
+	public org.jgrapht.Graph<String,DefaultEdge> getTGraph() {
 		return r;
 	}
 }

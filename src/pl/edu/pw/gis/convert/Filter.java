@@ -1,5 +1,9 @@
 package pl.edu.pw.gis.convert;
 
+import java.util.Set;
+
+import org.jgrapht.graph.DefaultEdge;
+
 import pl.edu.pw.gis.GraphConvertStrategy;
 import pl.edu.pw.gis.graph.Graph;
 
