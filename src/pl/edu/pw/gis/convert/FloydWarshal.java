@@ -1,4 +1,4 @@
-package pl.edu.pw.gis.graph.convert;
+package pl.edu.pw.gis.convert;
 
 import pl.edu.pw.gis.Graph;
 import pl.edu.pw.gis.GraphConvertStrategy;
