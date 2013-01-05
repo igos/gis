@@ -39,7 +39,6 @@ package pl.edu.pw.gis.tests;
  * 27-Jul-2003 : Initial revision (BN);
  *
  */
-package org.jgrapht.demo;
 
 import java.net.*;
 
