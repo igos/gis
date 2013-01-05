@@ -25,8 +25,6 @@ public class Filter implements GraphConvertStrategy {
 		
 		Set<DefaultEdge> edges = graph.edgeSet();
 		
-		graph.addEdge(arg0, arg1, arg2)
-		
 		for (DefaultEdge e : edges) {
 			if(graph.getEdgeWeight(e) > r) {
 				graph.removeEdge(e);
