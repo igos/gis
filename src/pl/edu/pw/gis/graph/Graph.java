@@ -16,11 +16,7 @@ public class Graph<String,DefaultEdge> {
 		return new JGraphXAdapter<String,DefaultEdge>(r);
 		
 	}
-	public org.jgrapht.Graph<String,DefaultEdge> getTGraph() {
-		return r;
-	}
-	
-	public ListenableUndirectedWeightedGraph<String,DefaultEdge> getGraph() {
+	public ListenableUndirectedWeightedGraph<String,DefaultEdge> getTGraph() {
 		return r;
 	}
 }

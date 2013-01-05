@@ -19,6 +19,8 @@ public class Filter implements GraphConvertStrategy {
 		Graph temp;
 		
 		Set<DefaultEdge> edges = graph.getTGraph().edgeSet();
+		
+		graph.getTGraph().
 
 		for (DefaultEdge e : edges) {
 			
