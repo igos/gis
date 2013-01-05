@@ -1,5 +1,7 @@
 package pl.edu.pw.gis;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 
 import org.jgrapht.ListenableGraph;
@@ -47,23 +49,11 @@ public class Main {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
-        frame.setVisible(true);
-        
-        //define layout 
-        mxFastOrganicLayout layout = new mxFastOrganicLayout(graph);
-
-        //set all properties
-        layout.setMinDistanceLimit(10);
-        layout.setInitialTemp(10);
-        layout.setForceConstant(10);
-        layout.setDisableEdgeStyle(true);
-
-        //layout graph
-        layout.execute(graph.getDefaultParent());
         
         
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
-        frame.getContentPane().add(graphComponent);
+        frame.getContentPane().add(BorderLayout.CENTER, graphComponent);
+        frame.setVisible(true);
         
         //dummy autogeometry
         graph.getModel().beginUpdate();
