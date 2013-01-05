@@ -6,7 +6,7 @@ import com.mxgraph.*;
 import com.mxgraph.view.mxGraph;
 
 public class Graph<V,E> {
-	SimpleWeightedGraph<V, E> r;
+	ListenableUndirectedWeightedGraph<V, E> r;
 	public Graph() {
 		
 	}
