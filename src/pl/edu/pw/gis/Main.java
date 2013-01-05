@@ -36,9 +36,11 @@ public class Main {
 
         Filter filter = new Filter(11.0);
         g = filter.convert(g);
-
+        
+        JGraphXAdapter<String, DefaultEdge> graph = g.getXGraph();
+        
         JFrame frame = new JFrame();
-        mxGraphComponent graphComponent = new mxGraphComponent(g.getXGraph());
+        mxGraphComponent graphComponent = new mxGraphComponent(graph);
         frame.getContentPane().add(graphComponent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
