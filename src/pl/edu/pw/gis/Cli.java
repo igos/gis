@@ -19,7 +19,11 @@ public class Cli {
 		
 		Settings settings = parseCliArgs(args);
 		if (settings == null) {
-			//cannot go on like that. messages already displayed.
+			//cannot go on like that. no settings!
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.setWidth(160);
+			// aaargh, cannot print on stderr...
+			formatter.printHelp("gis.jar", buildCliOptions());
 			System.exit(1);
 		}
 		// we got a nice settings object. let's read the file into some graph object.
@@ -56,7 +60,7 @@ public class Cli {
 		return options;
 	}
 
-	private static Settings parseCliArgs(String[] args) {
+	public static Settings parseCliArgs(String[] args) {
 
 		Options options = buildCliOptions();
 		Settings settings= null;
@@ -86,10 +90,12 @@ public class Cli {
 			// oops, something went wrong
 			System.err.println("Error parsing input parameters: "
 					+ exp.getMessage());
-			HelpFormatter formatter = new HelpFormatter();
-			formatter.setWidth(160);
-			// aaargh, cannot print on stderr...
-			formatter.printHelp("gis.jar", options);
+			settings = null;
+		}
+		catch (NumberFormatException ex) {
+			System.err.println("Error parsing numbers: "
+					+ ex.getMessage());
+			settings = null;
 		}
 		return settings;
 	}
