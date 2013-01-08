@@ -1,5 +1,9 @@
 package pl.edu.pw.gis;
 
+import java.io.IOException;
+
+import com.tinkerpop.blueprints.util.io.gml.GMLReader;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -7,6 +11,10 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.jgrapht.graph.DefaultWeightedEdge;
+
+import pl.edu.pw.gis.graph.GMLGraphBuilder;
+import pl.edu.pw.gis.graph.Graph;
 
 public class Cli {
 
@@ -28,7 +36,19 @@ public class Cli {
 		}
 		// we got a nice settings object. let's read the file into some graph
 		// object.
-
+		
+		Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+		GMLGraphBuilder gb = new GMLGraphBuilder(g);
+		try {
+			gb.readGMLFile(settings.filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("cannot parse provided GML file: " + settings.filePath);
+			System.exit(2);
+		}
+		// g should be filled now!
+		
+		System.out.println("graph we have: " + g.toString());
 	}
 
 	@SuppressWarnings("static-access")
