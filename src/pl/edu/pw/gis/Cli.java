@@ -2,8 +2,6 @@ package pl.edu.pw.gis;
 
 import java.io.IOException;
 
-import com.tinkerpop.blueprints.util.io.gml.GMLReader;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -11,13 +9,15 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.FloydWarshallShortestPaths;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 import pl.edu.pw.gis.graph.GMLGraphBuilder;
 import pl.edu.pw.gis.graph.Graph;
 
 public class Cli {
-
+	
 	/**
 	 * Entry point for Command Line interface
 	 * 
@@ -36,19 +36,42 @@ public class Cli {
 		}
 		// we got a nice settings object. let's read the file into some graph
 		// object.
-		
-		Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+
+		Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(
+				DefaultWeightedEdge.class);
 		GMLGraphBuilder gb = new GMLGraphBuilder(g);
 		try {
 			gb.readGMLFile(settings.filePath);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.println("cannot parse provided GML file: " + settings.filePath);
+			System.err.println("cannot parse provided GML file: "
+					+ settings.filePath);
 			System.exit(2);
 		}
 		// g should be filled now!
-		
 		System.out.println("graph we have: " + g.toString());
+
+		// some data structure, vertex -> reachable vertices
+		CentralContainer centrals = new CentralContainer();
+		// do the floyd-warshall thing
+		FloydWarshallShortestPaths<String, DefaultWeightedEdge> fw = new FloydWarshallShortestPaths<String, DefaultWeightedEdge>(
+				g);
+		for (String v : g.vertexSet()) {
+			// for each vertex get shortest paths to all other vertices, and
+			// remove vertices if path's length is > radius
+			for (GraphPath<String, DefaultWeightedEdge> gp : fw
+					.getShortestPaths(v)) {
+				// pre-centrals relations
+				if (gp.getWeight() > settings.radius) {
+					// destination is a central for start edge
+					centrals.put(gp.getEndVertex(), gp.getStartVertex());
+				}
+			}
+
+		}
+		System.out.println(centrals.toString());
+		// okay, in cetrals there are redundant centrals. step 2 is done. what now?
+
 	}
 
 	@SuppressWarnings("static-access")
