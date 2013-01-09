@@ -43,4 +43,16 @@ class CentralContainer {
 		}
 		return sb.toString();
 	}
+
+	/**
+	 * Method looks at centrals and vertices and tries to optimize this so each vertex appears in one list.
+	 */
+	public void optimize() {
+		/**
+		 * - sort by set's length and remove smaller groups of if they are subsets of bigger ones
+		 * - remove reflexibility
+		 * - 
+		 */
+		
+	}
 }

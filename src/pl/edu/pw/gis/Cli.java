@@ -73,6 +73,18 @@ public class Cli {
 		}
 		System.out.println(centrals.toString());
 		// okay, in cetrals there are redundant centrals. step 2 is done. what now?
+		centrals.optimize();
+		
+		if (settings.test) {
+			boolean result = CorrectnessChecker.check(centrals, g, settings.radius);
+			if (result)
+			{
+				System.out.println("brute-force test passed.");
+			}
+			else {
+				System.out.println("brute-force test failed.");
+			}
+		}
 
 	}
 
