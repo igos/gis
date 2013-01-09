@@ -1,3 +1,4 @@
 /bin
 /libs/**/docs/**
 !libs/jgraphx-master/lib/jgraphx.jar
+.classpath
