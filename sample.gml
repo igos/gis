@@ -1,6 +1,6 @@
 graph [
         comment "This is a sample graph"
-        directed 1
+        directed 0
         id 42
         label "Hello, I am a graph"
         node [

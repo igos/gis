@@ -62,12 +62,14 @@ public class Cli {
 			for (GraphPath<String, DefaultWeightedEdge> gp : fw
 					.getShortestPaths(v)) {
 				// pre-centrals relations
-				if (gp.getWeight() > settings.radius) {
+				if (settings.verbose) {
+					System.out.println("|" + gp.getStartVertex() + "," + gp.getEndVertex() + "| = " + gp.getWeight());
+				}
+				if (gp.getWeight() <= settings.radius) {
 					// destination is a central for start edge
-					centrals.put(gp.getEndVertex(), gp.getStartVertex());
+					centrals.put(gp.getStartVertex(), gp.getEndVertex());
 				}
 			}
-
 		}
 		System.out.println(centrals.toString());
 		// okay, in cetrals there are redundant centrals. step 2 is done. what now?
