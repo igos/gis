@@ -127,8 +127,11 @@ public class GraphGenenerator {
 			writer.println("\t]");
 		}
 
-		writer.println("]");
+		writer.print("]");
 		writer.flush();
+		if (file != null) {
+			writer.close();
+		}
 		
 		System.out.println("All done!");
 	}

@@ -24,6 +24,11 @@ public class GMLGraphBuilder {
 	}
 
 	public void readGMLFile(String filepath) throws IOException {
+		readGMLFile(filepath, false);
+	}
+
+	public void readGMLFile(String filepath, boolean verbose)
+			throws IOException {
 		GMLReader gmlReader = new GMLReader(graph);
 		if (!new File(filepath).canRead()) {
 			throw new FileNotFoundException("file '" + filepath
@@ -32,7 +37,8 @@ public class GMLGraphBuilder {
 		gmlReader.inputGraph(new FileInputStream(filepath));
 		for (Vertex v : graph.getVertices()) {
 			String id = (String) v.getId();
-			System.out.println("loaded vertex: " + id);
+			if (verbose)
+				System.out.println("loaded vertex: " + id);
 			wrapped.addVertex(id);
 		}
 
@@ -43,10 +49,11 @@ public class GMLGraphBuilder {
 				throw new IOException(
 						"Invalid GML file format, each edge should has 'weight' property");
 			}
-			System.out.println("loaded edge: " + id + ", from "
-					+ e.getVertex(Direction.IN).getId() + " to "
-					+ e.getVertex(Direction.OUT).getId() + " with weight "
-					+ weight);
+			if (verbose)
+				System.out.println("loaded edge: " + id + ", from "
+						+ e.getVertex(Direction.IN).getId() + " to "
+						+ e.getVertex(Direction.OUT).getId() + " with weight "
+						+ weight);
 
 			// add edge, read edge's value first
 			wrapped.addWeightedEdge(e.getVertex(Direction.IN).getId()
