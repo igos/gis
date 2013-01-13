@@ -1,7 +1,6 @@
 package pl.edu.pw.gis;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Random;
@@ -31,7 +30,7 @@ public class GraphGenenerator {
 	 * @throws IOException 
 	 */
 	@SuppressWarnings("static-access")
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Options options = new Options();
 		options.addOption(OptionBuilder
 				.withArgName("vertices")
@@ -87,12 +86,13 @@ public class GraphGenenerator {
 			g.addWeightedEdge("" + r.nextInt(vertices),
 					"" + r.nextInt(vertices), r.nextDouble() * weight);
 			} catch (IllegalArgumentException e) {
-				System.err.println("WARN: " + e.getMessage());
+//				System.err.println("WARN: " + e.getMessage());
 				// loops are not allowed
-			} catch (NullPointerException e) {
-				System.err.println("WARN: " + e.getMessage());
-				// such edge must have existed, a pity..
 				i--;
+			} catch (NullPointerException e) {
+//				System.err.println("WARN: " + e.getMessage());
+				// such edge must have existed, a pity..
+				i--; //we need another vertex
 			}
 			// vertexArray[i] = "" + i;
 		}
@@ -104,8 +104,13 @@ public class GraphGenenerator {
 		}
 		else {
 			File f = new File(file);
-			f.createNewFile();
-			writer = new PrintStream(f);
+			try {
+				f.createNewFile();
+				writer = new PrintStream(f);
+			} catch (IOException e) {
+				System.err.println("ooops..." + e.getMessage());
+				e.printStackTrace();
+			}
 		}
 
 		writer.println("graph [");
