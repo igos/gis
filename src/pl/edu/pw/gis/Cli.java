@@ -69,6 +69,10 @@ public class Cli {
 					// destination is a central for start edge
 					centrals.put(gp.getStartVertex(), gp.getEndVertex());
 				}
+				else {
+					// just put the vertex, no reachable central for now
+					centrals.put(gp.getStartVertex());
+				}
 			}
 		}
 		System.out.println(centrals.toString());

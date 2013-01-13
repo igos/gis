@@ -55,4 +55,18 @@ class CentralContainer {
 		 */
 		
 	}
+	/**
+	 * If some vertex has no reachable vertices within given range - make sure such vertex appears in the collection 
+	 * @param justVertex
+	 */
+	public void put(String justVertex) {
+		TreeSet<String> set = map.get(justVertex);
+		if (set == null) {
+			set = new TreeSet<String>();
+			map.put(justVertex, set);
+		}
+		else {
+			// it's okay, this vertex has been added previously
+		}
+	}
 }

@@ -18,6 +18,10 @@ graph [
                 label "node 3"
                 thisIsASampleAttribute 44
         ]
+        node [
+                id 4
+                label "node 4"
+        ]
         edge [
                 source 1
                 target 2
@@ -35,5 +39,10 @@ graph [
                 target 1
                 label "Edge from node 3 to node 1"
                 weight 5
+        ]
+        edge [
+        		source 3
+        		target 4
+        		weight 100
         ]
 ]
