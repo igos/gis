@@ -80,7 +80,7 @@ public class Cli {
 		centrals.optimize();
 		
 		if (settings.test) {
-			boolean result = CorrectnessChecker.check(centrals, g, settings.radius);
+			boolean result = CorrectnessChecker.check(centrals, g, settings.radius, fw);
 			if (result)
 			{
 				System.out.println("brute-force test passed.");

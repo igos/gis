@@ -69,4 +69,12 @@ class CentralContainer {
 			// it's okay, this vertex has been added previously
 		}
 	}
+
+	public Iterable<String> getCentrals() {
+		return map.keySet();
+	}
+
+	public boolean isCentral(String v) {
+		return map.containsKey(v);
+	}
 }
