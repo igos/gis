@@ -1,9 +1,14 @@
 package pl.edu.pw.gis;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.RunnableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -12,12 +17,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.FloydWarshallShortestPaths;
-import org.jgrapht.graph.DefaultWeightedEdge;
-
-import pl.edu.pw.gis.graph.GMLGraphBuilder;
-import pl.edu.pw.gis.graph.Graph;
 
 public class Cli {
 
@@ -40,105 +39,49 @@ public class Cli {
 		// we got a nice settings object. let's read the file into some graph
 		// object.
 
-		long t0 = System.currentTimeMillis();
-		System.out.println(timestamp(t0) + " | Loading data...");
+		RunnableFuture<FindCentralsImpl> rf = new FutureTask<FindCentralsImpl>(
+				new FindCentralsImpl(settings));
+		ExecutorService es = Executors.newSingleThreadExecutor();
+		es.execute(rf);
+		FindCentralsImpl result = null;
 
-		Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(
-				DefaultWeightedEdge.class);
-		GMLGraphBuilder gb = new GMLGraphBuilder(g);
 		try {
-			gb.readGMLFile(settings.filePath);
-		} catch (IOException e) {
+			if (settings.limit > 0)
+				result = rf.get(settings.limit, TimeUnit.SECONDS);
+			else
+				result = rf.get();
+		} catch (TimeoutException te) {
+			// computation did not made it...
+			rf.cancel(true);
+			System.out
+					.println("[!!] Timeout of "
+							+ settings.limit
+							+ "s reached. Computation abandoned. Progam will exit now.");
+			System.exit(3);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
-			System.err.println("cannot parse provided GML file: "
-					+ settings.filePath);
-			System.exit(2);
 		}
-		// g should be filled now!
-		if (settings.verbose)
-			System.out.println("graph we have: " + g.toString());
+		es.shutdown();
 
-		// some data structure, vertex -> reachable vertices
-		CentralContainer centrals = new CentralContainer();
-		// do the floyd-warshall thing
-		FloydWarshallShortestPaths<String, DefaultWeightedEdge> fw = new FloydWarshallShortestPaths<String, DefaultWeightedEdge>(
-				g);
-
-		System.out.println(timestamp(t0)
-				+ " | Graph loaded, starting computation...");
-
-		for (String v : g.vertexSet()) {
-			// for each vertex get shortest paths to all other vertices, and
-			// remove vertices if path's length is > radius
-			for (GraphPath<String, DefaultWeightedEdge> gp : fw
-					.getShortestPaths(v)) {
-				// pre-centrals relations
-				if (settings.verbose) {
-					System.out.println("|" + gp.getStartVertex() + ","
-							+ gp.getEndVertex() + "| = " + gp.getWeight());
-				}
-				if (gp.getWeight() <= settings.radius) {
-					// destination is a central for start edge
-					centrals.put(gp.getStartVertex(), gp.getEndVertex());
-				} else {
-					// just put the vertex, no reachable central for now
-					centrals.put(gp.getStartVertex());
-				}
-			}
-		}
-		System.out.println(timestamp(t0) + " | Potential centrals found.");
-		if (settings.verbose)
-			System.out.println(centrals.toString());
-		// okay, in cetrals there are redundant centrals. step 2 is done. what
-		// now?
-		centrals.optimize();
-		System.out.println(timestamp(t0) + " | Potential centrals optimized.");
-		if (settings.verbose)
-			System.out.println(centrals.toString());
-
-		if (settings.test) {
-			boolean result = CorrectnessChecker.check(centrals, g,
-					settings.radius, fw);
-
-			if (result) {
-				System.out.println(timestamp(t0)
-						+ " | brute-force test passed.");
-			} else {
-				System.out.println(timestamp(t0)
-						+ " | brute-force test failed.");
-			}
-		}
-		System.out.println(timestamp(t0) + " | Computation is done.");
-
-		ArrayList<String> printCentrals = new ArrayList<String>();
-		for (String s : centrals.getCentrals()) {
-			printCentrals.add(s);
-		}
-		Collections.sort(printCentrals, new Comparator<String>() {
-
-			@Override
-			public int compare(String o1, String o2) {
-				return Integer.parseInt(o1) - Integer.parseInt(o2);
-			}
-
-		});
 		if (!settings.graphx) {
+			ArrayList<String> printCentrals = new ArrayList<String>();
+			for (String s : result.getCentrals().getCentrals()) {
+				printCentrals.add(s);
+			}
+			Collections.sort(printCentrals, new Comparator<String>() {
+
+				@Override
+				public int compare(String o1, String o2) {
+					return Integer.parseInt(o1) - Integer.parseInt(o2);
+				}
+
+			});
 			System.out.println("Centrals found: " + printCentrals);
 		} else {
 			System.err.println("Visual result presentation not implemented");
 		}
-	}
 
-	private static String timestamp(long t0) {
-		long diff = System.currentTimeMillis() - t0;
-		if (diff < 0) {
-			diff = 0;
-		}
-		final long min = (diff / 60000);
-		final long sec = (diff - min * 60000) / 1000;
-		final long ms = diff - min * 60000 - sec * 1000;
-
-		return String.format("+ %d m, %d s, %d ms", min, sec, ms);
 	}
 
 	@SuppressWarnings("static-access")
