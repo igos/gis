@@ -71,7 +71,8 @@ public class GraphGenenerator {
 		}
 		System.out.println("Generating graph with " + vertices
 				+ " vertices, with edge probability of " + probability + "...");
-
+		System.out.println("max heap size: " + Runtime.getRuntime().maxMemory()/1024/1024 + "MB");
+		
 		// do the generation
 		Random r = new Random();
 		Graph<String, DefaultWeightedEdge> g = new Graph<String, DefaultWeightedEdge>(
@@ -81,10 +82,13 @@ public class GraphGenenerator {
 			g.addVertex("" + i);
 			// vertexArray[i] = "" + i;
 		}
+		int left = 0;
 		for (int i = 0; i < vertices * vertices * probability; i++) {
 			try {
-			g.addWeightedEdge("" + r.nextInt(vertices),
-					"" + r.nextInt(vertices), r.nextDouble() * weight);
+				left += r.nextInt(new Double(29.0 * vertices * (left + 1)/vertices).intValue());
+				left %= (vertices - 3);
+			g.addWeightedEdge("" + left,
+					"" + (left + r.nextInt(vertices - left) + 1), r.nextDouble() * weight);
 			} catch (IllegalArgumentException e) {
 //				System.err.println("WARN: " + e.getMessage());
 				// loops are not allowed
@@ -94,6 +98,8 @@ public class GraphGenenerator {
 				// such edge must have existed, a pity..
 				i--; //we need another vertex
 			}
+			if (i % 100000 == 0)
+				System.out.print("\r\\e[2K" + (i * 100 / (vertices * vertices * probability)) + "%");
 			// vertexArray[i] = "" + i;
 		}
 		System.out.println("Done! Writing to " + (file==null ? "screen" : "file " + file) + "...");
