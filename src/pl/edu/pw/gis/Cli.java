@@ -58,11 +58,20 @@ public class Cli {
 							+ settings.limit
 							+ "s reached. Computation abandoned. Progam will exit now.");
 			System.exit(3);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
 		}
-		es.shutdown();
+		catch (OutOfMemoryError e ) {
+			System.out.println("[!!] Program run out of memory, increase heap size (-Xmx size) and try again");
+			System.exit(4);
+		}
+		catch (Exception e) {
+			// Evil, unhandled exception!
+			System.out.println("[!!] System error: " + e.getMessage());
+			e.printStackTrace();
+			System.exit(666);
+		}
+		finally {
+			es.shutdown();
+		}
 
 		if (!settings.graphx) {
 			ArrayList<String> printCentrals = new ArrayList<String>();
