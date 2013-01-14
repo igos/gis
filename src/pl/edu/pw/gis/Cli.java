@@ -66,7 +66,7 @@ public class Cli {
 		catch (Exception e) {
 			// Evil, unhandled exception!
 			System.out.println("[!!] System error: " + e.getMessage());
-			e.printStackTrace();
+//			e.printStackTrace();
 			System.exit(666);
 		}
 		finally {
@@ -142,11 +142,19 @@ public class Cli {
 
 			if (line.hasOption("l")) {
 				settings.limit = Long.parseLong(line.getOptionValue("l"));
+				if (settings.limit <= 0) {
+					System.out.println("Time limit must be > 0. Exitting...");
+					System.exit(6);
+				}
 			}
 			if (settings.verbose) {
 				System.out.println("[I] Input parameters parsed successfully:");
 				System.out.println("[I] r=" + settings.radius + ", file="
 						+ settings.filePath);
+			}
+			if (settings.radius <= 0) {
+				System.out.println("Radius must be > 0. Exitting...");
+				System.exit(5);
 			}
 		}
 
