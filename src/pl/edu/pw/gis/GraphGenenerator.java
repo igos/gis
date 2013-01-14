@@ -83,12 +83,12 @@ public class GraphGenenerator {
 			// vertexArray[i] = "" + i;
 		}
 		int left = 0;
-		for (int i = 0; i < vertices * vertices * probability; i++) {
+		for (int i = 0; i < vertices * (vertices - 1) * probability / 2 ; i++) {
 			try {
 				left += r.nextInt(new Double(29.0 * vertices * (left + 1)/vertices).intValue());
 				left %= (vertices - 3);
 			g.addWeightedEdge("" + left,
-					"" + (left + r.nextInt(vertices - left) + 1), r.nextDouble() * weight);
+					"" + (left + r.nextInt(vertices - left) + 1), Math.round( r.nextDouble() * weight * 100.0 ) / 100.0);
 			} catch (IllegalArgumentException e) {
 //				System.err.println("WARN: " + e.getMessage());
 				// loops are not allowed
@@ -99,7 +99,7 @@ public class GraphGenenerator {
 				i--; //we need another vertex
 			}
 			if (i % 100000 == 0)
-				System.out.print("\r\\e[2K" + (i * 100 / (vertices * vertices * probability)) + "%");
+				System.out.print("\r\\e[2K" + (Math.round( i * 100 / (vertices * (vertices - 1) * probability / 2) )) + "%");
 			// vertexArray[i] = "" + i;
 		}
 		System.out.println("Done! Writing to " + (file==null ? "screen" : "file " + file) + "...");
@@ -125,7 +125,7 @@ public class GraphGenenerator {
 		for (String v : g.vertexSet()) {
 			writer.println("\tnode [");
 			writer.println("\t\tid " + v);
-			writer.println("\t\tlabel " + v);
+			writer.println("\t\tlabel \"v" + v + "\"");
 			writer.println("\t]");
 		}
 
@@ -133,12 +133,12 @@ public class GraphGenenerator {
 			writer.println("\tedge [");
 			writer.println("\t\tsource " + g.getEdgeSource(v));
 			writer.println("\t\ttarget " + g.getEdgeTarget(v));
-			writer.println("\t\tlabel " + "\"" + g.getEdgeWeight(v) + "\"");
+			writer.println("\t\tlabel " + "\"w" + g.getEdgeWeight(v) + "\"");
 			writer.println("\t\tweight " + g.getEdgeWeight(v));
 			writer.println("\t]");
 		}
 
-		writer.print("]");
+		writer.println("]");
 		writer.flush();
 		if (file != null) {
 			writer.close();
