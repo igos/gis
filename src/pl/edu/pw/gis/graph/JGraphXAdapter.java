@@ -40,8 +40,10 @@ public class JGraphXAdapter<V, E> extends mxGraph implements GraphListener<V, E>
     this.graphT = graphT;
         graphT.addGraphListener(this);
         insertJGraphT(graphT);
-    }
-
+    }public JGraphXAdapter() {
+		// TODO Auto-generated constructor stub
+	}
+    
     /*
      * METHODS
      */

@@ -1,5 +1,6 @@
 package pl.edu.pw.gis;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,6 +11,8 @@ import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import javax.swing.JFrame;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -17,6 +20,13 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.jgrapht.graph.DefaultWeightedEdge;
+
+import pl.edu.pw.gis.graph.JGraphXAdapter;
+
+import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.swing.mxGraphComponent;
 
 public class Cli {
 
@@ -88,7 +98,32 @@ public class Cli {
 			});
 			System.out.println("Centrals found: " + printCentrals);
 		} else {
-			System.err.println("Visual result presentation not implemented");
+			//display
+			System.out.print(result.getGraph());
+			
+			final JGraphXAdapter<String, DefaultWeightedEdge> graph = result.getGraph().getXGraph();
+	        
+	        JFrame frame = new JFrame();
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setSize(600, 600);
+	        
+	        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+	        frame.getContentPane().add(BorderLayout.CENTER, graphComponent);
+	        frame.setVisible(true);
+	        
+	        graph.getModel().beginUpdate();
+	        double x = 5, y = 5;
+	        for (mxCell cell : graph.getVertexToCellMap().values()) {
+	            x = 10 + (int)(Math.random() * ((500 - 10) + 1));
+	            y = 10 + (int)(Math.random() * ((500 - 10) + 1));
+	        		            
+	        	graph.getModel().setGeometry(cell, new mxGeometry(x, y, 20, 20));
+	        	
+	        	if(result.getCentrals().isCentral(cell.getId())) {
+	        		graph.getModel().setStyle(cell, "defaultVertex;fillColor=red");
+	        	}
+	        }
+	        graph.getModel().endUpdate();
 		}
 
 	}
